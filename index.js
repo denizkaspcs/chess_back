@@ -3,6 +3,7 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+const cors = require('cors');
 const io = new Server(server, {
     cors: {
     origin: '*',
@@ -10,7 +11,12 @@ const io = new Server(server, {
   }
 });
 
+
+
 let connectionCounter = 0;
+
+app.use(cors());
+app.options('*', cors()); //put this before your route
 
 app.get('/', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -47,7 +53,14 @@ io.on('connection', (socket) => {
 })
 
 const PORT = process.env.PORT || 8080;
+
+server.listen(PORT);
+
+
+/*
+
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
   console.log('Press Ctrl+C to make quit.');
 });
+*/
