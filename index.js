@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   
-    res.sendFile(__dirname + '/index.html');
+    res.send("success");
 })
 
 io.on('connection', (socket) => {
